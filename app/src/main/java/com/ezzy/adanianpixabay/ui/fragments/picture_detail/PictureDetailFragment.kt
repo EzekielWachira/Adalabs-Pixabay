@@ -1,4 +1,4 @@
-package com.ezzy.adanianpixabay.ui.fragments
+package com.ezzy.adanianpixabay.ui.fragments.picture_detail
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
