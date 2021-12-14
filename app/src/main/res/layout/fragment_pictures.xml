@@ -153,6 +153,7 @@
                 android:layout_gravity="center"
                 android:id="@+id/layoutNoData"
                 android:visibility="gone"
+                tools:visibility="visible"
                 android:layout_marginTop="@dimen/_50sdp"
                 android:gravity="center"
                 android:orientation="vertical">

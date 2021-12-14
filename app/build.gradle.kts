@@ -42,6 +42,11 @@ android {
     buildFeatures {
         viewBinding = true
     }
+    testOptions {
+        unitTests {
+            isIncludeAndroidResources = true
+        }
+    }
 }
 
 dependencies {
@@ -134,6 +139,7 @@ dependencies {
     testImplementation(TestLibraries.liveDataTesting)
     testImplementation(TestLibraries.hiltTest)
     kaptTest(TestLibraries.hiltCompiler)
+    testImplementation("com.github.marcinOz:TestCoroutineRule:1.0.1")
 //    testImplementation("com.github.marcinOz:TestCoroutineRule:1.0.1")
     androidTestImplementation("androidx.arch.core:core-testing:2.1.0")
 }
