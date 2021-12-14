@@ -20,7 +20,14 @@ class ImageAdapter : ListAdapter<Image, ImageViewHolder>(UploadImageCallback) {
     }
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
-        holder.bindItem(getItem(position))
+        holder.apply {
+            bindItem(getItem(position))
+            baseLayout.setOnClickListener {
+                onItemClickListener?.let {
+                    it(getItem(position))
+                }
+            }
+        }
     }
 
     private object UploadImageCallback : DiffUtil.ItemCallback<Image>() {
@@ -36,5 +43,6 @@ class ImageAdapter : ListAdapter<Image, ImageViewHolder>(UploadImageCallback) {
     fun setOnClickListener(listener: (Image?) -> Unit) {
         onItemClickListener = listener
     }
+
 }
 

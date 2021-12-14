@@ -1,60 +1,86 @@
 package com.ezzy.adanianpixabay.ui.fragments.picture_detail
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.ezzy.adanianpixabay.R
+import com.ezzy.adanianpixabay.databinding.FragmentPictureDetailBinding
+import com.ezzy.adanianpixabay.domain.model.Image
+import com.ezzy.adanianpixabay.util.applyImage
+import com.google.android.material.chip.Chip
+import dagger.hilt.android.AndroidEntryPoint
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [PictureDetailFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+@AndroidEntryPoint
 class PictureDetailFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private var _binding: FragmentPictureDetailBinding? = null
+    private val binding get() = _binding!!
+
+    private val args: PictureDetailFragmentArgs by navArgs()
+    private var image: Image? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_picture_detail, container, false)
+    ): View {
+        _binding = FragmentPictureDetailBinding.inflate(inflater, container, false)
+
+        args.image.let { image = it }
+        setUpUi()
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment PictureDetailFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            PictureDetailFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    private fun setUpUi() {
+        with(binding) {
+            btnBack.setOnClickListener {
+                findNavController().popBackStack()
             }
+        }
     }
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        image?.let { img ->
+            with(binding) {
+                imageMain.applyImage(img.webformatURL)
+                userImage.applyImage(img.userImageURL)
+                name.text = img.user
+
+                val tags = stringToList(img.tags)
+                tags.forEach { tag ->
+                    val tagChip = LayoutInflater.from(requireContext())
+                        .inflate(R.layout.chip_item, null, false)
+                            as Chip
+                    tagChip.apply { text = tag }
+                    tagsChipGroup.addView(tagChip)
+                }
+
+                downloads.text = img.downloads.toString()
+                likes.text = img.likes.toString()
+                views.text = img.views.toString()
+                comments.text = img.comments.toString()
+                imageWidth.text = img.imageWidth.toString()
+                imageHeight.text = img.imageHeight.toString()
+                imageSize.text = img.imageSize.toString()
+            }
+        }
+    }
+
+    private fun stringToList(string: String): List<String> =
+        string.trim().splitToSequence(", ")
+            .filter { it.isNotEmpty() }
+            .toList()
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
+
 }

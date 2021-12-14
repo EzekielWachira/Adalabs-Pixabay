@@ -9,6 +9,8 @@ class ImageViewHolder(
     private val binding: ImageItemBinding
 ): RecyclerView.ViewHolder(binding.root) {
 
+    val baseLayout = binding.baseLyt
+
     fun bindItem(imageItem: Image) {
         with(binding) {
             userName.text = imageItem.user

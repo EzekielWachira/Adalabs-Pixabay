@@ -5,15 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ezzy.adanianpixabay.R
 import com.ezzy.adanianpixabay.common.Resource
 import com.ezzy.adanianpixabay.data.remote.dto.toImage
 import com.ezzy.adanianpixabay.databinding.FragmentPicturesBinding
+import com.ezzy.adanianpixabay.domain.model.Image
 import com.ezzy.adanianpixabay.util.hideView
 import com.ezzy.adanianpixabay.util.makeVisible
 import com.ezzy.adanianpixabay.util.showToast
@@ -65,10 +68,17 @@ class PicturesFragment : Fragment() {
             adapter = imageAdapter
             val divider =
                 MaterialDividerItemDecoration(context, LinearLayoutManager.VERTICAL).apply {
-//                        dividerInsetStart = 100
                     dividerColor = ContextCompat.getColor(requireContext(), R.color.grey_20)
                 }
             addItemDecoration(divider)
+        }
+
+        imageAdapter.setOnClickListener {
+            var bundle = bundleOf("image" to it)
+            findNavController().navigate(
+                R.id.action_picturesFragment_to_pictureDetailFragment,
+                bundle
+            )
         }
 
         initUiState()
@@ -76,7 +86,7 @@ class PicturesFragment : Fragment() {
 
     private fun initUiState() {
         lifecycleScope.launchWhenCreated {
-            picturesViewModel.imagesState.collect { state->
+            picturesViewModel.imagesState.collect { state ->
                 with(binding) {
                     when (state) {
                         is Resource.Loading -> {
@@ -96,7 +106,7 @@ class PicturesFragment : Fragment() {
                             showToast(state.errorMessage!!)
                         }
 
-                        is Resource.Empty ->{
+                        is Resource.Empty -> {
                             spinKit.hideView()
                             layoutNoData.makeVisible()
                         }
@@ -105,6 +115,10 @@ class PicturesFragment : Fragment() {
             }
         }
     }
+
+//    override fun onClick(image: Image) {
+
+//    }
 
     override fun onDestroy() {
         super.onDestroy()
