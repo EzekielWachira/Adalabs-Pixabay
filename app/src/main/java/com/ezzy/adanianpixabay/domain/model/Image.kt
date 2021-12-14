@@ -1,9 +1,13 @@
 package com.ezzy.adanianpixabay.domain.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import java.io.Serializable
 
+@Entity(tableName = "images")
 data class Image (
-    val id: Int,
+    @PrimaryKey(autoGenerate = true) val id: Int? = null,
+    val imageId: Int,
     val collections: Int,
     val comments: Int,
     val downloads: Int,

@@ -97,7 +97,7 @@ class PicturesFragment : Fragment() {
                         is Resource.Success -> {
                             layoutNoData.hideView()
                             spinKit.hideView()
-                            imageAdapter.submitList(state.data.hits.map { it.toImage() })
+                            imageAdapter.submitList(state.data)
                         }
 
                         is Resource.Failure -> {
