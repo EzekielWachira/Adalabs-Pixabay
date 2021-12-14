@@ -1,6 +1,8 @@
 package com.ezzy.adanianpixabay.di
 
 import com.ezzy.adanianpixabay.data.PixabayApi
+import com.ezzy.adanianpixabay.data.repository.ImageRepositoryImpl
+import com.ezzy.adanianpixabay.domain.repository.ImageRepository
 import com.ezzy.adanianpixabay.util.Constants
 import dagger.Module
 import dagger.Provides
@@ -38,5 +40,9 @@ object AppModule {
         OkHttpClient.Builder()
             .addInterceptor(httpLoggingInterceptor)
             .build()
+
+    @Provides
+    @Singleton
+    fun provideImagesRepository(api: PixabayApi): ImageRepository = ImageRepositoryImpl(api)
 
 }

@@ -3,6 +3,7 @@ package com.ezzy.adanianpixabay.domain.model
 import java.io.Serializable
 
 data class Image (
+    val id: Int,
     val collections: Int,
     val comments: Int,
     val downloads: Int,
