@@ -23,3 +23,12 @@ The app uses a combination Clean Architecture and MVVM architecture for separati
 * Data Binding - Jetpack library allowing to bind UI components to data sources
 * ViewModel - Designed to store and manage UI data in a lifecycler aware fashion.
 * Gradle Kotlin DSL build system
+
+## Art
+<img src="/art/Screenshot_2021-12-14-08-43-07-318_com.ezzy.adanianpixabay.jpg"/>
+
+<img src="/art/Screenshot_2021-12-14-08-43-15-460_com.ezzy.adanianpixabay.jpg"/>
+
+### Unit Tests
+<img src="/art/Screenshot%202021-12-15%20101536.png"/>
+<img src="/art/Screenshot 2021-12-15 101711.png"/>
