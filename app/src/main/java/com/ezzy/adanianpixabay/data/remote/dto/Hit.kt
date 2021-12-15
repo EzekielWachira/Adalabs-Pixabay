@@ -29,6 +29,7 @@ data class Hit(
 
 fun Hit.toImage(): Image {
     return Image(
+        null,
         id,
         collections,
         comments,

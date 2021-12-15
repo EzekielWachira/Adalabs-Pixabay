@@ -1,0 +1,72 @@
+package com.ezzy.adanianpixabay
+
+import com.ezzy.adanianpixabay.domain.model.Image
+
+val testImages = listOf(
+    Image(
+        1,
+        12,
+        23,
+        43,
+        56,
+        584,
+        545,
+        483,
+        "https://sampleimage.com/image.jpg",
+        234,
+        345,
+        "https://sampleimage.com/sample.jpg",
+        234,
+        "Flowers, Tullips",
+        "John Doe",
+        "https://sampleuserimage/userimage.jpg",
+        232,
+        435,
+        "hello",
+        564
+    ),
+    Image(
+        2,
+        45,
+        67,
+        56,
+        54,
+        678,
+        765,
+        554,
+        "https://sampleimage.com/image2.jpg",
+        43,
+        678,
+        "https://sampleimage.com/sample2.jpg",
+        465,
+        "Tullips",
+        "Haje Doe",
+        "https://sampleuserimage/userimage2.jpg",
+        345,
+        687,
+        "sample2",
+        353
+    ),
+    Image(
+        3,
+        566,
+        78,
+        456,
+        6677,
+        654,
+        456,
+        786,
+        "https://sampleimage.com/image3.jpg",
+        546,
+        345,
+        "https://sampleimage.com/sample3.jpg",
+        344,
+        "Roses",
+        "Smith John",
+        "https://sampleuserimage/userimage3.jpg",
+        354,
+        345,
+        "image3",
+        354
+    )
+)

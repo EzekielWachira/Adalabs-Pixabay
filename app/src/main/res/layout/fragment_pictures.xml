@@ -152,6 +152,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:id="@+id/layoutNoData"
+                android:visibility="gone"
+                tools:visibility="visible"
+                android:layout_marginTop="@dimen/_50sdp"
                 android:gravity="center"
                 android:orientation="vertical">
 
@@ -179,11 +182,13 @@
             </LinearLayout>
 
             <com.github.ybq.android.spinkit.SpinKitView
-                android:layout_width="@dimen/_40sdp"
-                android:layout_height="@dimen/_40sdp"
-                app:SpinKit_Style="ChasingDots"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:SpinKit_Style="MultiplePulse"
                 android:id="@+id/spinKit"
                 android:visibility="gone"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_50sdp"
                 app:SpinKit_Color="@color/green_500"/>
 
         </LinearLayout>

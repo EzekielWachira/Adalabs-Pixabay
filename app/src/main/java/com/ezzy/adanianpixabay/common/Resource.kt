@@ -12,3 +12,15 @@ sealed class Resource<out T> {
         fun <T> failed(message: String) = Failure<T>(message)
     }
 }
+
+typealias SimpleResource = Resource2<Unit>
+
+sealed class Resource2<T>(
+    val data: T? = null,
+    val message: String? = null
+) {
+    class Success<T>(data: T) : Resource2<T>(data)
+    class Loading<T>(data: T? = null) : Resource2<T>(data)
+    class Error<T>(message: String, data: T? = null) : Resource2<T>(data, message)
+
+}

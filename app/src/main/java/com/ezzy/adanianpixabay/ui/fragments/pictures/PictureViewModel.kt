@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ezzy.adanianpixabay.common.Resource
 import com.ezzy.adanianpixabay.data.remote.dto.ImageDto
+import com.ezzy.adanianpixabay.domain.model.Image
 import com.ezzy.adanianpixabay.domain.usecase.get_images.GetImagesUseCase
 import com.ezzy.adanianpixabay.domain.usecase.search_images.SearchImagesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,14 +19,14 @@ class PictureViewModel @Inject constructor(
     private val searchImagesUseCase: SearchImagesUseCase
 ): ViewModel() {
 
-    private var _imagesState = MutableStateFlow<Resource<ImageDto>>(Resource.Empty)
+    private var _imagesState = MutableStateFlow<Resource<List<Image>>>(Resource.Empty)
     private var _searchImageState = MutableStateFlow<Resource<ImageDto>>(Resource.Empty)
     val imagesState get() = _imagesState
     val searchImagesState get() = _searchImageState
 
-//    init {
-//        getImages()
-//    }
+    init {
+        searchImages("dog")
+    }
 
     fun getImages() = viewModelScope.launch {
         getImagesUseCase().collect { state->
